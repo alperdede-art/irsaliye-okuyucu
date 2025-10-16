@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next",
+      "config": {
+        "includeFiles": [
+          "sql/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/upload",
+      "dest": "/app/api/upload/route.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/save",
+      "dest": "/app/api/save/route.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/records",
+      "dest": "/app/api/records/route.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/api/records/(.*)",
+      "dest": "/app/api/records/[id]/route.ts",
+      "methods": ["PUT", "DELETE"]
+    },
+    {
+      "src": "/api/export.csv",
+      "dest": "/app/api/export/csv/route.ts",
+      "methods": ["GET"]
+    }
+  ],
+  "env": {
+    "OCR_PROVIDER": "azure"
+  }
+}
